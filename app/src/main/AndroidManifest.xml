@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.mummyding.phonemonitor" >
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Control_Mode_Setting"
+            android:label="@string/title_activity_control__mode__setting" >
+        </activity>
+        <activity
+            android:name=".Controlled_Mode_Setting"
+            android:label="@string/title_activity_controlled__mode__setting" >
+        </activity>
+        <activity
+            android:name=".showALinkDiaAty"
+            android:label="@string/title_activity_show_alink_dia_aty" >
+        </activity>
+        <activity
+            android:name=".Control_View"
+            android:label="@string/title_activity_control__view" >
+        </activity>
+        <activity
+            android:name=".Controlled_View"
+            android:label="@string/title_activity_controlled__view" >
+        </activity>
+    </application>
+
+</manifest>

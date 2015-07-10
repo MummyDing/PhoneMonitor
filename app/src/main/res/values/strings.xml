@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PhoneMonitor</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_control__mode__setting">Control_Mode_Setting</string>
+    <string name="title_activity_controlled__mode__setting">Controlled_Mode_Setting</string>
+    <string name="title_activity_show_alink_dia_aty">showALinkDiaAty</string>
+    <string name="title_activity_control__view">Control_View</string>
+    <string name="title_activity_controlled__view">Controlled_View</string>
+</resources>
