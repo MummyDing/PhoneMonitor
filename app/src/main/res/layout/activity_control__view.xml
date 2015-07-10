@@ -36,7 +36,7 @@
         android:id="@+id/vibration_btn"
         android:text="振动"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/call_back"
+        android:layout_below="@+id/call_back_btn"
         android:layout_marginTop="40dip"
         android:layout_width="200dip"
         android:layout_height="wrap_content" />
@@ -45,6 +45,15 @@
         android:text="响铃"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/vibration_btn"
+        android:layout_marginTop="40dip"
+        android:layout_width="200dip"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/disControl_btn"
+        android:text="断开控制"
+        android:background="#ff0000"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ring_btn"
         android:layout_marginTop="40dip"
         android:layout_width="200dip"
         android:layout_height="wrap_content" />

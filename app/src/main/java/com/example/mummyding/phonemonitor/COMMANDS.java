@@ -14,4 +14,6 @@ public class COMMANDS {
     public static final String CONTROL_CALLBACK ="COMMAND:Call_back";
     public static final String CONTROL_VIBRATION ="COMMAND:Vibration";
     public static final String CONTROL_RING = "COMMAND:Ring";
+    public static final String CONTROL_DISCONNECT = "COMMAND:Control_disconnect";
+    public static final String CONTROLLED_DISCONNECT = "COMMAND:Controlled_disconnect";
 }

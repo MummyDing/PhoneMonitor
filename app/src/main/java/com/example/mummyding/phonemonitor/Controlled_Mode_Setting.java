@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 
@@ -18,6 +19,7 @@ public class Controlled_Mode_Setting extends Activity implements View.OnClickLis
 
     Button controlled_Command_btn;
     EditText control_Num_et;
+
 
     public static String control_Num;
 

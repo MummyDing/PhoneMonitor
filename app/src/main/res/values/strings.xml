@@ -8,4 +8,9 @@
     <string name="title_activity_show_alink_dia_aty">showALinkDiaAty</string>
     <string name="title_activity_control__view">Control_View</string>
     <string name="title_activity_controlled__view">Controlled_View</string>
+    <string name="title_activity_send_pos_aty">sendPosAty</string>
+    <string name="title_activity_call_back_aty">call_backAty</string>
+    <string name="title_activity_vibrator_aty">vibratorAty</string>
+    <string name="title_activity_ring_aty">ringAty</string>
+    <string name="title_activity_reject_aty">rejectAty</string>
 </resources>

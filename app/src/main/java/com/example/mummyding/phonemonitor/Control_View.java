@@ -16,19 +16,26 @@ import android.widget.Toast;
 
 public class Control_View extends Activity implements View.OnClickListener{
 
-    Button location_btn,callback_btn,vibration_btn,ring_btn;
+    Button location_btn,callback_btn,vibration_btn,ring_btn,disControl_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control__view);
 
-
+        findView();
     }
     void findView(){
         location_btn = (Button) findViewById(R.id.location_btn);
         callback_btn = (Button) findViewById(R.id.call_back_btn);
         vibration_btn = (Button) findViewById(R.id.vibration_btn);
         ring_btn = (Button) findViewById(R.id.ring_btn);
+        disControl_btn = (Button) findViewById(R.id.disControl_btn);
+
+        location_btn.setOnClickListener(this);
+        callback_btn.setOnClickListener(this);
+        vibration_btn.setOnClickListener(this);
+        ring_btn.setOnClickListener(this);
+        disControl_btn.setOnClickListener(this);
     }
 
     void sendControlCommand(String phoneNum,String message){
@@ -55,6 +62,13 @@ public class Control_View extends Activity implements View.OnClickListener{
                 break;
             case R.id.ring_btn:
                 sendControlCommand(Control_Mode_Setting.controlled_Num,COMMANDS.CONTROL_RING);
+                break;
+            case R.id.disControl_btn:
+                sendControlCommand(Control_Mode_Setting.controlled_Num,COMMANDS.CONTROL_DISCONNECT);
+                MainActivity.isControl = false;
+                MainActivity.isControl = false;
+                Control_Mode_Setting.controlled_Num ="";
+                Controlled_Mode_Setting.control_Num = "";
                 break;
         }
     }
