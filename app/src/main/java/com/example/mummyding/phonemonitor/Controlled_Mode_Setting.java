@@ -71,7 +71,7 @@ public class Controlled_Mode_Setting extends Activity implements View.OnClickLis
                     showALinkDiaAty.isIn = true;
                     sendControlCommand();
                 }else{
-                    Toast.makeText(Controlled_Mode_Setting.this,"号码输入不完整",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Controlled_Mode_Setting.this,"号码输入不完整！",Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
