@@ -58,6 +58,10 @@ public class ReceiveMsg extends BroadcastReceiver {
             if(message.equals(COMMANDS.CONTROLLED_DISCONNECT)){
                 MainActivity.isControlled = false;
                 MainActivity.isControl = false;
+                Intent newIntent = new Intent(context,MainActivity.class);
+                // 在Service中启动Activity，必须设置如下标志
+                newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(newIntent);
             }
         }
 
@@ -66,6 +70,11 @@ public class ReceiveMsg extends BroadcastReceiver {
             if(message.equals(COMMANDS.CONTROL_DISCONNECT)){
                 MainActivity.isControlled = false;
                 MainActivity.isControl = false;
+                Intent newIntent = new Intent(context,MainActivity.class);
+                // 在Service中启动Activity，必须设置如下标志
+                newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(newIntent);
+
             }
 
             //接收处理指令

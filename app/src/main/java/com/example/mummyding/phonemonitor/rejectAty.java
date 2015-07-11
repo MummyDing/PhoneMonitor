@@ -17,6 +17,7 @@ public class rejectAty extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reject_aty);
         sendControlCommand(Controlled_Mode_Setting.control_Num,"拒绝响应！");
+        onDestroy();
     }
     public  void sendControlCommand(String phoneNum,String Message ){
         PendingIntent pi = PendingIntent.getActivity(this, 0, new Intent(this,showALinkDiaAty.class ), 0);

@@ -2,6 +2,7 @@ package com.example.mummyding.phonemonitor;
 
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -23,8 +24,16 @@ public class Control_Mode_Setting extends Activity implements View.OnClickListen
     public static String controlled_Num;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control__mode__setting);
+        if(MainActivity.isControl||MainActivity.isControlled){
+            Intent newIntent = new Intent(Control_Mode_Setting.this,MainActivity.class);
+            // 在Service中启动Activity，必须设置如下标志
+            newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(newIntent);
+            return;
+        }
         findView();
     }
     void findView(){
@@ -56,6 +65,7 @@ public class Control_Mode_Setting extends Activity implements View.OnClickListen
             case R.id.Control_Command_btn:
                 if(checkNum(controlled_Num_et.getText().toString())){
                     controlled_Num = controlled_Num_et.getText().toString();
+                    MainActivity.isControl = true;
                     sendControlCommand();
                 }
                 else {

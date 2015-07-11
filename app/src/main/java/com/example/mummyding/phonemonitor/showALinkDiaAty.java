@@ -23,7 +23,6 @@ public class showALinkDiaAty extends Activity {
         setContentView(R.layout.activity_show_alink_dia_aty);
         if(isIn)
         showALinkDia(ReceiveMsg.phoneNum);
-
     }
 
     public  void sendControlCommand(String phoneNum,String Message ){

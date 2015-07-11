@@ -16,7 +16,7 @@ public class vibratorAty extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vibrator_aty);
         vibrator();
-        finish();
+        onDestroy();
     }
 
     void vibrator(){

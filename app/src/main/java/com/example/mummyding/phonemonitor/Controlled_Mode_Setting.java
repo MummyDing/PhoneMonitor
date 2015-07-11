@@ -25,8 +25,16 @@ public class Controlled_Mode_Setting extends Activity implements View.OnClickLis
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_controlled__mode__setting);
+        if(MainActivity.isControl||MainActivity.isControlled){
+            Intent newIntent = new Intent(Controlled_Mode_Setting.this,MainActivity.class);
+            // 在Service中启动Activity，必须设置如下标志
+            newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(newIntent);
+            return;
+        }
         findView();
     }
 
@@ -60,6 +68,7 @@ public class Controlled_Mode_Setting extends Activity implements View.OnClickLis
             case R.id.Controlled_Command_btn:
                 if(checkNum(control_Num_et.getText().toString())){
                     control_Num = control_Num_et.getText().toString();
+                    showALinkDiaAty.isIn = true;
                     sendControlCommand();
                 }else{
                     Toast.makeText(Controlled_Mode_Setting.this,"号码输入不完整",Toast.LENGTH_SHORT).show();
