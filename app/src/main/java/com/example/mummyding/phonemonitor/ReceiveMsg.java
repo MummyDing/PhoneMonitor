@@ -24,7 +24,8 @@ public class ReceiveMsg extends BroadcastReceiver {
         //控制指令
         if(message.equals(COMMANDS.CONTROL_COMMAND)){
             Intent newIntent = new Intent(context,showALinkDiaAty.class);
-            // 在Service中启动Activity，必须设置如下标志
+            // 在Service中启动Activity，必须设置如下标志 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            showALinkDiaAty.isdiaStart = false;
             newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(newIntent);
             return ;
@@ -32,6 +33,7 @@ public class ReceiveMsg extends BroadcastReceiver {
         if(message.equals(COMMANDS.CONTROL_SUCCESSFUL_COMMAND)){
             Toast.makeText(context,"成功建立控制连接！",Toast.LENGTH_SHORT).show();
             MainActivity.isControl = true;
+            MainActivity.isControlled = false;
             Intent newIntent = new Intent(context,Control_View.class);
             // 在Service中启动Activity，必须设置如下标志
             newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -49,7 +51,8 @@ public class ReceiveMsg extends BroadcastReceiver {
 
         //请求被控指令
         if(message.equals(COMMANDS.CONTROLLED_COMMAND)){
-            MainActivity.isControlled = true;
+            MainActivity.isControl = true;
+            MainActivity.isControlled = false;
             Control_Mode_Setting.controlled_Num = phoneNum;
         }
 
@@ -83,15 +86,13 @@ public class ReceiveMsg extends BroadcastReceiver {
                 if(Controlled_View.isLocation == false){
                     //拒绝请求
                     Intent newIntent = new Intent(context,rejectAty.class);
-                    // 在Service中启动Activity，必须设置如下标志
-                    newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(newIntent);
+                    context.startService(newIntent);
+                    context.stopService(newIntent);
                     return ;
                 }
                 Intent newIntent = new Intent(context,sendPosAty.class);
-                // 在Service中启动Activity，必须设置如下标志
-                newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(newIntent);
+                context.startService(newIntent);
+                context.stopService(newIntent);
             }
             //回拨
             if(message.equals(COMMANDS.CONTROL_CALLBACK)){
@@ -100,15 +101,14 @@ public class ReceiveMsg extends BroadcastReceiver {
                 if(Controlled_View.isCall_back == false){
                 //拒绝请求
                     Intent newIntent = new Intent(context,rejectAty.class);
-                    // 在Service中启动Activity，必须设置如下标志
-                    newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(newIntent);
+                    context.startService(newIntent);
+                    //执行完后一定要停止 Service,不然下次无法启动
+                    context.stopService(newIntent);
                     return  ;
                 }
                 Intent newIntent = new Intent(context,call_backAty.class);
-                // 在Service中启动Activity，必须设置如下标志
-                newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(newIntent);
+                context.startService(newIntent);
+                context.stopService(newIntent);
             }
             //振动
             if(message.equals(COMMANDS.CONTROL_VIBRATION)){
@@ -116,15 +116,14 @@ public class ReceiveMsg extends BroadcastReceiver {
                 if(Controlled_View.isVibrator == false){
                     //拒绝请求
                     Intent newIntent = new Intent(context,rejectAty.class);
-                    // 在Service中启动Activity，必须设置如下标志
-                    newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(newIntent);
+                    context.startService(newIntent);
+                    //执行完后一定要停止 Service,不然下次无法启动
+                    context.stopService(newIntent);
                     return ;
                 }
                 Intent newIntent = new Intent(context,vibratorAty.class);
-                // 在Service中启动Activity，必须设置如下标志
-                newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(newIntent);
+                context.startService(newIntent);
+                context.stopService(newIntent);
             }
             //响铃
             if(message.equals(COMMANDS.CONTROL_RING)){
@@ -132,16 +131,16 @@ public class ReceiveMsg extends BroadcastReceiver {
                 if(Controlled_View.isRing == false){
                     //拒绝请求
                     Intent newIntent = new Intent(context,rejectAty.class);
-                    // 在Service中启动Activity，必须设置如下标志
-                    newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(newIntent);
+                    context.startService(newIntent);
+                    //执行完后一定要停止 Service,不然下次无法启动
+                    context.stopService(newIntent);
                     return;
                 }
 
                 Intent newIntent = new Intent(context,ringAty.class);
-                // 在Service中启动Activity，必须设置如下标志
-                newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(newIntent);
+                context.startService(newIntent);
+                //执行完后一定要停止 Service,不然下次无法启动
+                context.stopService(newIntent);
             }
         }
     }

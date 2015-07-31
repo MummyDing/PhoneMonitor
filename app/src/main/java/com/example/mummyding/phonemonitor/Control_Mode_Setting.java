@@ -10,6 +10,7 @@ import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ public class Control_Mode_Setting extends Activity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏
         setContentView(R.layout.activity_control__mode__setting);
         if(MainActivity.isControl||MainActivity.isControlled){
             Intent newIntent = new Intent(Control_Mode_Setting.this,MainActivity.class);
@@ -43,7 +45,7 @@ public class Control_Mode_Setting extends Activity implements View.OnClickListen
     }
 
     boolean checkNum(String str){
-        if(str.length() != 11){
+        if(str.length() != Controlled_Mode_Setting.phoneNumLength){
             return false;
         }
         return true;

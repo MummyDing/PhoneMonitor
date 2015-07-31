@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -23,7 +25,11 @@ public class Controlled_View extends Activity implements CompoundButton.OnChecke
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏
         setContentView(R.layout.activity_controlled__view);
+
+        // 防止 Activity 重启～
+        if(MainActivity.isControlled == false) finish();
         findView();
     }
     void findView(){
@@ -63,6 +69,8 @@ public class Controlled_View extends Activity implements CompoundButton.OnChecke
                 isLocation = location_sw.isChecked();
                 break;
             case R.id.call_back_sw:
+                Toast.makeText(this,"主控号码:"+Controlled_Mode_Setting.control_Num,Toast.LENGTH_SHORT).show();
+
                 isCall_back = call_back_sw.isChecked();
                 break;
             case R.id.vibration_sw:
@@ -80,9 +88,15 @@ public class Controlled_View extends Activity implements CompoundButton.OnChecke
             case R.id.disControlled_btn:
                 sendControlCommand(Controlled_Mode_Setting.control_Num,COMMANDS.CONTROLLED_DISCONNECT);
                 MainActivity.isControl = false;
-                MainActivity.isControl = false;
+                MainActivity.isControlled = false;
                 Control_Mode_Setting.controlled_Num ="";
                 Controlled_Mode_Setting.control_Num = "";
+
+
+                //返回主界面
+                Intent intent = new Intent(this,MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 break;
         }
 

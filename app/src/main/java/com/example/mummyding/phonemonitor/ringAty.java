@@ -1,11 +1,14 @@
 package com.example.mummyding.phonemonitor;
 
 import android.app.Activity;
+import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.IBinder;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,16 +17,7 @@ import android.view.MenuItem;
 import java.io.IOException;
 
 
-public class ringAty extends Activity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ring_aty);
-
-        playSound();
-        onDestroy();
-    }
+public class ringAty extends Service {
 
    void playSound(){
        Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
@@ -57,6 +51,17 @@ public class ringAty extends Activity {
        }
        mMediaPlayer.start();//开始播放
    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        playSound();
+    }
 }
 
 

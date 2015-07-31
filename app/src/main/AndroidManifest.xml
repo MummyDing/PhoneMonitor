@@ -36,7 +36,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,44 +45,50 @@
         </activity>
         <activity
             android:name=".Control_Mode_Setting"
-            android:label="@string/title_activity_control__mode__setting" >
+            android:label="@string/title_activity_control__mode__setting"
+            android:noHistory="true"
+            >
         </activity>
         <activity
             android:name=".Controlled_Mode_Setting"
-            android:label="@string/title_activity_controlled__mode__setting" >
+            android:label="@string/title_activity_controlled__mode__setting"
+            >
         </activity>
         <activity
             android:name=".showALinkDiaAty"
-            android:label="@string/title_activity_show_alink_dia_aty" >
+            android:label="@string/title_activity_show_alink_dia_aty"
+            android:theme="@android:style/Theme.Dialog"
+            >
         </activity>
         <activity
             android:name=".Control_View"
-            android:label="@string/title_activity_control__view" >
+            android:label="@string/title_activity_control__view"
+            >
         </activity>
         <activity
             android:name=".Controlled_View"
             android:label="@string/title_activity_controlled__view" >
         </activity>
-        <activity
+        <service
             android:name=".sendPosAty"
             android:label="@string/title_activity_send_pos_aty" >
-        </activity>
-        <activity
+        </service>
+        <service
             android:name=".call_backAty"
             android:label="@string/title_activity_call_back_aty" >
-        </activity>
-        <activity
+        </service>
+        <service
             android:name=".vibratorAty"
             android:label="@string/title_activity_vibrator_aty" >
-        </activity>
-        <activity
+        </service>
+        <service
             android:name=".ringAty"
             android:label="@string/title_activity_ring_aty" >
-        </activity>
-        <activity
+        </service>
+        <service
             android:name=".rejectAty"
             android:label="@string/title_activity_reject_aty" >
-        </activity>
+        </service>
     </application>
 
 </manifest>

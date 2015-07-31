@@ -2,11 +2,13 @@ package com.example.mummyding.phonemonitor;
 
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,16 +20,10 @@ import com.amap.api.location.LocationManagerProxy;
 import com.amap.api.location.LocationProviderProxy;
 
 
-public class sendPosAty extends Activity implements AMapLocationListener {
+public class sendPosAty extends Service implements AMapLocationListener {
 
     // 定义LocationManager对象
     private LocationManagerProxy mLocationManagerProxy;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_send_pos_aty);
-        init();
-    }
     public  void sendControlCommand(String phoneNum,String Message ){
         PendingIntent pi = PendingIntent.getActivity(this, 0, new Intent(this,showALinkDiaAty.class ), 0);
 
@@ -86,5 +82,16 @@ public class sendPosAty extends Activity implements AMapLocationListener {
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        init();
     }
 }

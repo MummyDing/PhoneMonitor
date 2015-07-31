@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -20,8 +23,10 @@ public class Control_View extends Activity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏
         setContentView(R.layout.activity_control__view);
-
+        // 防止 Activity 重启～
+        if(MainActivity.isControl == false) finish();
         findView();
     }
     void findView(){
@@ -55,7 +60,8 @@ public class Control_View extends Activity implements View.OnClickListener{
                 sendControlCommand(Control_Mode_Setting.controlled_Num,COMMANDS.CONTROL_LOCATION);
                 break;
             case R.id.call_back_btn:
-                sendControlCommand(Control_Mode_Setting.controlled_Num,COMMANDS.CONTROL_CALLBACK);
+                Toast.makeText(this, "被控号码:" + Control_Mode_Setting.controlled_Num, Toast.LENGTH_SHORT).show();
+                sendControlCommand(Control_Mode_Setting.controlled_Num, COMMANDS.CONTROL_CALLBACK);
                 break;
             case R.id.vibration_btn:
                 sendControlCommand(Control_Mode_Setting.controlled_Num,COMMANDS.CONTROL_VIBRATION);
@@ -64,11 +70,15 @@ public class Control_View extends Activity implements View.OnClickListener{
                 sendControlCommand(Control_Mode_Setting.controlled_Num,COMMANDS.CONTROL_RING);
                 break;
             case R.id.disControl_btn:
-                sendControlCommand(Control_Mode_Setting.controlled_Num,COMMANDS.CONTROL_DISCONNECT);
+                sendControlCommand(Control_Mode_Setting.controlled_Num, COMMANDS.CONTROL_DISCONNECT);
                 MainActivity.isControl = false;
-                MainActivity.isControl = false;
+                MainActivity.isControlled = false;
                 Control_Mode_Setting.controlled_Num ="";
                 Controlled_Mode_Setting.control_Num = "";
+                //返回主界面
+                Intent intent = new Intent(this,MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 break;
         }
     }

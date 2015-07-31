@@ -9,6 +9,7 @@ import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -22,11 +23,12 @@ public class Controlled_Mode_Setting extends Activity implements View.OnClickLis
 
 
     public static String control_Num;
-
+    public static int phoneNumLength = 11;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏
         setContentView(R.layout.activity_controlled__mode__setting);
         if(MainActivity.isControl||MainActivity.isControlled){
             Intent newIntent = new Intent(Controlled_Mode_Setting.this,MainActivity.class);
@@ -45,7 +47,7 @@ public class Controlled_Mode_Setting extends Activity implements View.OnClickLis
     }
 
     boolean checkNum(String str){
-        if(str.length() != 11){
+        if(str.length() != phoneNumLength){
             return false;
         }
         return true;
@@ -68,7 +70,7 @@ public class Controlled_Mode_Setting extends Activity implements View.OnClickLis
             case R.id.Controlled_Command_btn:
                 if(checkNum(control_Num_et.getText().toString())){
                     control_Num = control_Num_et.getText().toString();
-                    showALinkDiaAty.isIn = true;
+                    MainActivity.isControlled = true;
                     sendControlCommand();
                 }else{
                     Toast.makeText(Controlled_Mode_Setting.this,"号码输入不完整！",Toast.LENGTH_SHORT).show();
