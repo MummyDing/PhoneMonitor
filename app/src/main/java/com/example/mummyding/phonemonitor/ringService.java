@@ -17,7 +17,7 @@ import android.view.MenuItem;
 import java.io.IOException;
 
 
-public class ringAty extends Service {
+public class ringService extends Service {
 
    void playSound(){
        Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);

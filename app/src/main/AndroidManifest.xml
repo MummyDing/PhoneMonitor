@@ -70,24 +70,19 @@
             android:label="@string/title_activity_controlled__view" >
         </activity>
         <service
-            android:name=".sendPosAty"
-            android:label="@string/title_activity_send_pos_aty" >
+            android:name=".sendPosService">
         </service>
         <service
-            android:name=".call_backAty"
-            android:label="@string/title_activity_call_back_aty" >
+            android:name=".call_backService">
         </service>
         <service
-            android:name=".vibratorAty"
-            android:label="@string/title_activity_vibrator_aty" >
+            android:name=".vibratorService" >
         </service>
         <service
-            android:name=".ringAty"
-            android:label="@string/title_activity_ring_aty" >
+            android:name=".ringService">
         </service>
         <service
-            android:name=".rejectAty"
-            android:label="@string/title_activity_reject_aty" >
+            android:name=".rejectService" >
         </service>
     </application>
 

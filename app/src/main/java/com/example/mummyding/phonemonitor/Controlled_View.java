@@ -69,9 +69,7 @@ public class Controlled_View extends Activity implements CompoundButton.OnChecke
                 isLocation = location_sw.isChecked();
                 break;
             case R.id.call_back_sw:
-                Toast.makeText(this,"主控号码:"+Controlled_Mode_Setting.control_Num,Toast.LENGTH_SHORT).show();
-
-                isCall_back = call_back_sw.isChecked();
+                 isCall_back = call_back_sw.isChecked();
                 break;
             case R.id.vibration_sw:
                 isVibrator = vibrator_sw.isChecked();
@@ -91,6 +89,13 @@ public class Controlled_View extends Activity implements CompoundButton.OnChecke
                 MainActivity.isControlled = false;
                 Control_Mode_Setting.controlled_Num ="";
                 Controlled_Mode_Setting.control_Num = "";
+
+                //保存状态&号码
+                MainActivity.editor.putBoolean("isControl",false);
+                MainActivity.editor.putBoolean("isControlled",false);
+                MainActivity.editor.putString("control_Num", "");
+                MainActivity.editor.putString("controlled_Num", "");
+                MainActivity.editor.commit();
 
 
                 //返回主界面

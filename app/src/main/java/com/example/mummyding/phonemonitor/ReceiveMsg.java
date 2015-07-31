@@ -3,10 +3,8 @@ package com.example.mummyding.phonemonitor;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
-import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -14,12 +12,10 @@ import android.widget.Toast;
  */
 public class ReceiveMsg extends BroadcastReceiver {
 
-    private LocationManager locationManager;
     public static final String receiveBroadcast = "android.provider.Telephony.SMS_RECEIVED";
     public static String phoneNum,message;
     void dealData(Context context,String phoneNum,String message){
         //处理短信
-
 
         //控制指令
         if(message.equals(COMMANDS.CONTROL_COMMAND)){
@@ -59,8 +55,16 @@ public class ReceiveMsg extends BroadcastReceiver {
         //被控端请求断开控制
         if(phoneNum.equals(Control_Mode_Setting.controlled_Num)){
             if(message.equals(COMMANDS.CONTROLLED_DISCONNECT)){
-                MainActivity.isControlled = false;
                 MainActivity.isControl = false;
+                MainActivity.isControlled = false;
+                Control_Mode_Setting.controlled_Num ="";
+                Controlled_Mode_Setting.control_Num = "";
+
+                //保存状态&号码
+                MainActivity.editor.putBoolean("isControl",false);
+                MainActivity.editor.putBoolean("isControlled",false);
+                MainActivity.editor.putString("control_Num", "");
+                MainActivity.editor.putString("controlled_Num", "");
                 Intent newIntent = new Intent(context,MainActivity.class);
                 // 在Service中启动Activity，必须设置如下标志
                 newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -71,8 +75,16 @@ public class ReceiveMsg extends BroadcastReceiver {
         if(phoneNum.equals(Controlled_Mode_Setting.control_Num)){
             //主控端请求断开控制
             if(message.equals(COMMANDS.CONTROL_DISCONNECT)){
-                MainActivity.isControlled = false;
                 MainActivity.isControl = false;
+                MainActivity.isControlled = false;
+                Control_Mode_Setting.controlled_Num ="";
+                Controlled_Mode_Setting.control_Num = "";
+
+                //保存状态&号码
+                MainActivity.editor.putBoolean("isControl",false);
+                MainActivity.editor.putBoolean("isControlled",false);
+                MainActivity.editor.putString("control_Num", "");
+                MainActivity.editor.putString("controlled_Num", "");
                 Intent newIntent = new Intent(context,MainActivity.class);
                 // 在Service中启动Activity，必须设置如下标志
                 newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -85,12 +97,12 @@ public class ReceiveMsg extends BroadcastReceiver {
             if(message.equals(COMMANDS.CONTROL_LOCATION)){
                 if(Controlled_View.isLocation == false){
                     //拒绝请求
-                    Intent newIntent = new Intent(context,rejectAty.class);
+                    Intent newIntent = new Intent(context,rejectService.class);
                     context.startService(newIntent);
                     context.stopService(newIntent);
                     return ;
                 }
-                Intent newIntent = new Intent(context,sendPosAty.class);
+                Intent newIntent = new Intent(context,sendPosService.class);
                 context.startService(newIntent);
                 context.stopService(newIntent);
             }
@@ -100,13 +112,13 @@ public class ReceiveMsg extends BroadcastReceiver {
 
                 if(Controlled_View.isCall_back == false){
                 //拒绝请求
-                    Intent newIntent = new Intent(context,rejectAty.class);
+                    Intent newIntent = new Intent(context,rejectService.class);
                     context.startService(newIntent);
                     //执行完后一定要停止 Service,不然下次无法启动
                     context.stopService(newIntent);
                     return  ;
                 }
-                Intent newIntent = new Intent(context,call_backAty.class);
+                Intent newIntent = new Intent(context,call_backService.class);
                 context.startService(newIntent);
                 context.stopService(newIntent);
             }
@@ -115,13 +127,13 @@ public class ReceiveMsg extends BroadcastReceiver {
 
                 if(Controlled_View.isVibrator == false){
                     //拒绝请求
-                    Intent newIntent = new Intent(context,rejectAty.class);
+                    Intent newIntent = new Intent(context,rejectService.class);
                     context.startService(newIntent);
                     //执行完后一定要停止 Service,不然下次无法启动
                     context.stopService(newIntent);
                     return ;
                 }
-                Intent newIntent = new Intent(context,vibratorAty.class);
+                Intent newIntent = new Intent(context,vibratorService.class);
                 context.startService(newIntent);
                 context.stopService(newIntent);
             }
@@ -130,14 +142,14 @@ public class ReceiveMsg extends BroadcastReceiver {
 
                 if(Controlled_View.isRing == false){
                     //拒绝请求
-                    Intent newIntent = new Intent(context,rejectAty.class);
+                    Intent newIntent = new Intent(context,rejectService.class);
                     context.startService(newIntent);
                     //执行完后一定要停止 Service,不然下次无法启动
                     context.stopService(newIntent);
                     return;
                 }
 
-                Intent newIntent = new Intent(context,ringAty.class);
+                Intent newIntent = new Intent(context,ringService.class);
                 context.startService(newIntent);
                 //执行完后一定要停止 Service,不然下次无法启动
                 context.stopService(newIntent);

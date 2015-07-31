@@ -71,6 +71,11 @@ public class Controlled_Mode_Setting extends Activity implements View.OnClickLis
                 if(checkNum(control_Num_et.getText().toString())){
                     control_Num = control_Num_et.getText().toString();
                     MainActivity.isControlled = true;
+
+                    //保存状态&号码
+                    MainActivity.editor.putBoolean("isControlled",true);
+                    MainActivity.editor.putString("control_Num", control_Num);
+                    MainActivity.editor.commit();
                     sendControlCommand();
                 }else{
                     Toast.makeText(Controlled_Mode_Setting.this,"号码输入不完整！",Toast.LENGTH_SHORT).show();

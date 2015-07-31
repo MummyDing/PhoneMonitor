@@ -12,7 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class call_backAty extends Service {
+public class call_backService extends Service {
     void callback(){
         Log.d("回拨", "callback执行");
         Intent intent = new Intent();//创建一个意图对象，用来激发拨号的Activity

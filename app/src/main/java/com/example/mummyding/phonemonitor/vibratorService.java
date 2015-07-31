@@ -12,7 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class vibratorAty extends Service {
+public class vibratorService extends Service {
 
     void vibrator(){
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);

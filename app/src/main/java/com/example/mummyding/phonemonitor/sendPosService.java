@@ -20,7 +20,7 @@ import com.amap.api.location.LocationManagerProxy;
 import com.amap.api.location.LocationProviderProxy;
 
 
-public class sendPosAty extends Service implements AMapLocationListener {
+public class sendPosService extends Service implements AMapLocationListener {
 
     // 定义LocationManager对象
     private LocationManagerProxy mLocationManagerProxy;

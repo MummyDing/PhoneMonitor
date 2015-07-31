@@ -60,8 +60,7 @@ public class Control_View extends Activity implements View.OnClickListener{
                 sendControlCommand(Control_Mode_Setting.controlled_Num,COMMANDS.CONTROL_LOCATION);
                 break;
             case R.id.call_back_btn:
-                Toast.makeText(this, "被控号码:" + Control_Mode_Setting.controlled_Num, Toast.LENGTH_SHORT).show();
-                sendControlCommand(Control_Mode_Setting.controlled_Num, COMMANDS.CONTROL_CALLBACK);
+                 sendControlCommand(Control_Mode_Setting.controlled_Num, COMMANDS.CONTROL_CALLBACK);
                 break;
             case R.id.vibration_btn:
                 sendControlCommand(Control_Mode_Setting.controlled_Num,COMMANDS.CONTROL_VIBRATION);
@@ -75,6 +74,13 @@ public class Control_View extends Activity implements View.OnClickListener{
                 MainActivity.isControlled = false;
                 Control_Mode_Setting.controlled_Num ="";
                 Controlled_Mode_Setting.control_Num = "";
+
+                //保存状态&号码
+                MainActivity.editor.putBoolean("isControl",false);
+                MainActivity.editor.putBoolean("isControlled",false);
+                MainActivity.editor.putString("control_Num", "");
+                MainActivity.editor.putString("controlled_Num","");
+                MainActivity.editor.commit();
                 //返回主界面
                 Intent intent = new Intent(this,MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

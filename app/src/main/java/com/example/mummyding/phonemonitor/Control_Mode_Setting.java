@@ -68,6 +68,11 @@ public class Control_Mode_Setting extends Activity implements View.OnClickListen
                 if(checkNum(controlled_Num_et.getText().toString())){
                     controlled_Num = controlled_Num_et.getText().toString();
                     MainActivity.isControl = true;
+
+                    //保存状态&号码
+                    MainActivity.editor.putBoolean("isControl", true);
+                    MainActivity.editor.putString("controlled_Num", controlled_Num);
+                    MainActivity.editor.commit();
                     sendControlCommand();
                 }
                 else {

@@ -12,7 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class rejectAty extends Service {
+public class rejectService extends Service {
     public  void sendControlCommand(String phoneNum,String Message ){
         PendingIntent pi = PendingIntent.getActivity(this, 0, new Intent(this,showALinkDiaAty.class ), 0);
 

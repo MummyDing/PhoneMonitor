@@ -3,6 +3,7 @@ package com.example.mummyding.phonemonitor;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.FeatureGroupInfo;
 import android.content.pm.FeatureInfo;
 import android.location.LocationManager;
@@ -24,19 +25,27 @@ public class MainActivity extends Activity implements View.OnClickListener{
     Button control_btn,controlled_btn;
     public static boolean isControl = false;
     public static boolean isControlled = false;
+    public static SharedPreferences sp;
+    public static SharedPreferences.Editor editor ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏
         setContentView(R.layout.activity_main);
-        findView();
+        init_findView();
     }
 
-    void findView(){
+    void init_findView(){
         control_btn = (Button) findViewById(R.id.Control_Mode_btn);
         controlled_btn = (Button) findViewById(R.id.Controlled_Mode_btn);
         control_btn.setOnClickListener(this);
         controlled_btn.setOnClickListener(this);
+        sp =getSharedPreferences("userInfo", MODE_PRIVATE);
+        isControl = sp.getBoolean("isControl",false);
+        isControlled = sp.getBoolean("isControlled", false);
+        Control_Mode_Setting.controlled_Num = sp.getString("controlled_Num", "");
+        Controlled_Mode_Setting.control_Num = sp.getString("controll_Num","");
+        editor =sp.edit();
     }
 
     @Override

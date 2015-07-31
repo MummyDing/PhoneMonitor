@@ -95,6 +95,10 @@ public class showALinkDiaAty extends Activity implements View.OnClickListener{
                 sendControlCommand(phoneNum, COMMANDS.CONTROL_SUCCESSFUL_COMMAND);
                 MainActivity.isControlled = true;
                 Controlled_Mode_Setting.control_Num = phoneNum;
+                //保存状态&号码
+                MainActivity.editor.putBoolean("isControlled",true);
+                MainActivity.editor.putString("control_Num", phoneNum);
+                MainActivity.editor.commit();
                 isdiaStart = true;
                 this.finish();
                 break;
